@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <title>Covid Data</title>
+  
+  <!--Required meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--JS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='covid_chart.js') }}"></script>
+  
+  <!--CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type='text/css' href="static/main.css">
+  
+</head>
+<!--http://openweathermap.org/img/w/{icon}.png-->
+<body>
+  <!-- Start Nav bar-->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand text-danger mx-auto" href="/">COVID DATA PER COUNTRY</a>
+  </nav>
+  <!--End Nav Bar-->
+
+  <!--Main Container-->
+  <div class="container shadow-lg bg-light justify-content-center">
+    <div class="row text-center">
+        <form method="POST" class="col-md-6 col-xs-12 offset-md-3">
+            <div class="form-group">
+                <label for="input-country text-center">Enter Country</label>
+                <input type="text" name="country" class="form-control" placeholder='E.g. "World" or "USA"'>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-block">Get Covid Data</button>
+                <small class="form-text text-muted" id="date-entry"></small>
+            </div>
+        </form>
+    <div class="col-md-12 col-sm-12 col-xs-12 pt-5 mb-5">
+        <div class="container">
+          <canvas id="covid-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Main Container-->
+  
+
+
+  <!-- Footer -->
+  <footer class="footer font-small bg-dark fixed-bottom">
+    <div class="footer-copyright text-center py-2 text-danger"> <small>© 2020 Copyright: Mesud Erkam Cengiz</small></div>
+  </footer>
+  <!-- End Footer -->
+  <script>
+    pullData( {{ covid_data|tojson }}, {{ country|tojson}})
+  </script>
+</body>
+
+</html>
