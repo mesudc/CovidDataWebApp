@@ -39,14 +39,8 @@ function generateChart(country, active_cases, total_case, total_deaths, total_re
 }
 //pulls data from api and form if no entry is submitted in country field = defaults to world
 function pullData(covid_data, country){
-    country = country.toLowerCase();
-    if (country == ''){
-        country = "world";
-        checkCountry(covid_data, country);
-    }else{
-        checkCountry(covid_data, country);
-    }
-    
+    country = country == '' ? 'world' : country.toLowerCase(); 
+    checkCountry(covid_data, country);    
 }
 
 //Checks form data entry and if country is found, parses data for 
